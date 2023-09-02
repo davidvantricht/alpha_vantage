@@ -115,3 +115,24 @@ class FundamentalData(av):
         """
         _FUNCTION_KEY = 'CASH_FLOW'
         return _FUNCTION_KEY, 'quarterlyReports', 'symbol'
+
+    @av._output_format
+    @av._call_api_on_func
+    def get_listing_status(self):
+        """
+        Returns a list of active or delisted US stocks and ETFs, either as of the
+        latest trading day or at a specific time in history. The endpoint is
+        positioned to facilitate equity research on asset lifecycle and survivorship.
+        Keyword Arguments:
+            date:   If no date is set, the API endpoint will return a list of active
+                    or delisted symbols as of the latest trading day. If a date is set,
+                    the API endpoint will "travel back" in time and return a list of
+                    active or delisted symbols on that particular date in history.
+                    Any YYYY-MM-DD date later than 2010-01-01 is supported.
+                    For example, date=2013-08-03
+            state:  By default, state=active and the API will return a list of actively
+                    traded stocks and ETFs. Set state=delisted to query a list of
+                    delisted assets.
+        """
+        _FUNCTION_KEY = 'LISTING_STATUS'
+        return _FUNCTION_KEY, 'date', 'state'
